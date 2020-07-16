@@ -1,0 +1,16 @@
+{
+
+    "manifest_version": 2,
+    "name": "YouTube Dynamic Compressor",
+    "version": "1.0",
+  
+    "description": "Adds a dynamic compressor to YouTube watch pages to to normalize all the audio",
+  
+    "content_scripts": [
+      {
+        "matches": ["*://*.youtube.com/watch*"],
+        "js": ["yt_compressor.js"]
+      }
+    ]
+  
+  }
