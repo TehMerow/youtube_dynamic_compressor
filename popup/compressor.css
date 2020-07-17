@@ -1,0 +1,28 @@
+*,*::before,*::after{
+    box-sizing: border-box;
+}
+html,body{
+    margin: 0;
+    height: 100%;
+}
+#app{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#compressor_toggle{
+    --size: 16rem;
+    background-color: rgba(0,0,0,0);
+    border:none;
+    height: var(--size);
+    width : var(--size);
+}
+svg{
+    height: 100%;
+    fill: #aaa;
+}
+.active{
+    fill: hsl(200, 50%, 50%);
+}
