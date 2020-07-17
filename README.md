@@ -9,4 +9,3 @@ Once installed a small icon is added to the youtube player, when it is outlined 
 ### Compressor is on
 ![on_icon](screens/on.png)
 
-this addon can be found on the Firefox Addon Site at: 

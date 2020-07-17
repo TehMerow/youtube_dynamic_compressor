@@ -1,16 +1,28 @@
 (function(){
+    // Quick check to see if the addon has run 
+    // on the page before.
     if (window.hasRun){
       return
     }
 
     window.hasRun = true;
    
+    // Grabs the Youtube play bar where the 
+    // left hand controls are. Used so 
+    // the compression button has a place to go.
     const youtube_play_bar = document.querySelector('.ytp-left-controls')
+    
+    // Compression boolean if it's on
+    // or off.
     let compression_on = false
+
+    // creates compressor, source and audio context variables
     let compressor;
     let source;
     let audioCtx = new AudioContext()
 
+    // Dictionary for storing the SVG icons
+    // that represent the On and Off states.
     let icons = {
       'off' : `<svg viewBox="0 0 24 24">
       <path fill="currentColor" d="M15,21H9V3H15V21M11,19H13V5H11V19M8,21H2V11H8V21M4,19H6V13H4V19M22,21H16V8H22V21M18,19H20V10H18V19Z" />
@@ -28,16 +40,30 @@
       var gainVal = 50
       source = audioCtx.createMediaElementSource(video);
       compressor = audioCtx.createDynamicsCompressor()
-    
+      
+      // compressor settings
+      // TODO
+      // Expose these controls in a settings page 
       compressor.threshold.value = -gainVal
       compressor.ratio.value = 20
       compressor.attack.value = 0.01
       compressor.release.value = 0.2
 
+      // Connect the audio source (the video player)
+      // to the audio context.
+      // For some reason the audio completely breaks 
+      // if you don't do this. 
       source.connect(audioCtx.destination)
       
     }
-    // helper function for creating the button
+    // Helper function for creating the button
+    // Creates the button, adds and ID 
+    // Inserts the off SVG icon (could be a better way to do this?)
+    // Adds the ytp-buttton class which is the youtube player button
+    // Class that styles it the same as the other buttons
+    // Adds some padding
+    // appends it to the ytp-playbar
+    // returns button
     function create_button(){
       var btn = document.createElement('button');
       btn.id = "yt_compression_button"
@@ -61,6 +87,7 @@
       compressor.disconnect(audioCtx.destination)
       source.connect(audioCtx.destination);
     }
+
     create_audio_compressor()
     
     // quick function to place in the event listener
@@ -78,8 +105,11 @@
       }
     }
 
+    // Create the compression button and cache 
+    // in variable
     let compression_button = create_button()
 
+    // Attaches a click event to the button
     compression_button.addEventListener('click', connect_objects)
     
     })()
