@@ -11,11 +11,34 @@
         <div id="controls">
             <div id="th" class="slider">
                 <h3>Threshold</h3>
-                <p>min</p>
+                <p>-100DB</p>
                 <input type="range" name="thresh" id="threshold" min="-100" max="100">
-                <p>max</p>
+                <p>-0DB</p>
             </div>
+            
+            <div id="ra" class="slider">
+                <h3>Ratio</h3>
+                <p>1</p>
+                <input type="range" name="ratio" id="ratio" min="1" max="100">
+                <p>20</p>
+            </div>
+            
+            <div id="at" class="slider">
+                <h3>Attack</h3>
+                <p>0.01</p>
+                <input type="range" name="attack" id="attack" min="0.01" max="1.0">
+                <p>1.0</p>
+            </div>
+
+            <div id="re" class="slider">
+                <h3>Release</h3>
+                <p>0.01</p>
+                <input type="range" name="release" id="release" min="0.01" max="1.0">
+                <p>1.0</p>
+            </div>
+            
         </div>
     </div>
+    <script src="app.js"></script>
 </body>
 </html>

@@ -2,10 +2,33 @@
     box-sizing: border-box;
 }
 html,body{
+    --bg_color: hsl(200, 20%, 10%);
+    --bg_accent: hsl(200, 20%, 20%);
+    --t_color: #fff;
+    --f_size : 22px;
     margin: 0;
     height: 100%;
+    background-color: var(--bg_color);
+    color: var(--t_color);
+    font-size: var(--f_size);
 }
 #app{
     display:flex;
     flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+#controls{
+    background-color: var(--bg_accent);
+    width: 90%;
+    padding: 1em;
+}
+.slider{
+    width: 100%;
+    display: flex;
+    justify-content:space-around ;
+    align-items: center;
+}
+input[type=range]{
+    width:50%;
 }

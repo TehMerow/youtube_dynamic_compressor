@@ -7,6 +7,12 @@
     "icons" : {
       "48": "icons/icon.png"
     },
+    "options_ui" : {
+      "page": "settings_page/index.html"
+    },
+    "permissions" : [
+      "storage"
+    ], 
   
     "description": "Adds a dynamic compressor to YouTube watch pages to to normalize all the audio",
     "homepage_url" : "https://github.com/TehMerow/youtube_dynamic_compressor", 

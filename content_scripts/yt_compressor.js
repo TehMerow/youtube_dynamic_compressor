@@ -1,4 +1,7 @@
+
+
 (function(){
+  
     // Quick check to see if the addon has run 
     // on the page before.
     if (window.hasRun){
@@ -6,7 +9,12 @@
     }
 
     window.hasRun = true;
-   
+    const default_compressor_settings = {
+      "threshold" : -50,
+      "ratio" : 20,
+      "attack" : 0.01,
+      "release" : 0.2
+    }
     // Grabs the Youtube play bar where the 
     // left hand controls are. Used so 
     // the compression button has a place to go.
@@ -35,19 +43,18 @@
     // creates the audio context
     // grabs the video player turns it into a media source
     // create the compressor
-    function create_audio_compressor(){
+    function create_audio_compressor(thresh, ratio, attack, release){
       var video = document.querySelector('video');
-      var gainVal = 50
       source = audioCtx.createMediaElementSource(video);
       compressor = audioCtx.createDynamicsCompressor()
       
       // compressor settings
       // TODO
       // Expose these controls in a settings page 
-      compressor.threshold.value = -gainVal
-      compressor.ratio.value = 20
-      compressor.attack.value = 0.01
-      compressor.release.value = 0.2
+      compressor.threshold.value = thresh
+      compressor.ratio.value = ratio
+      compressor.attack.value = attack
+      compressor.release.value = release
 
       // Connect the audio source (the video player)
       // to the audio context.
@@ -88,8 +95,33 @@
       source.connect(audioCtx.destination);
     }
 
-    create_audio_compressor()
+
+    // Function for instatiating the compressor
+    // and then propogating the values with 
+    // either default values or if a 
+    // local storage entry exists, fill it 
+    // with the local storage values
+   function _instance_compressor(){
+     let ls = localStorage
+     if (ls.getItem("compression_settings_threshold") == null){
+       create_audio_compressor(
+         default_compressor_settings.threshold,
+         default_compressor_settings.ratio,
+         default_compressor_settings.attack,
+         default_compressor_settings.release,
+       )
+     }else{
+       create_audio_compressor(
+        ls.getItem("compression_settings_threshold"),
+        ls.getItem("compression_settings_ratio"),
+        ls.getItem("compression_settings_attack"),
+        ls.getItem("compression_settings_release")
+       )
+     }
+   }
     
+   _instance_compressor()
+
     // quick function to place in the event listener
     // checks the state of the audio compressor and 
     // toggle both the button and the compressors
