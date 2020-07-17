@@ -1,8 +1,10 @@
 (function(){
-    // TODO
-    // add a toggle button on the page where you can turn it on and off
-    // turn this into an addon
-      
+    if (window.hasRun){
+      return
+    }
+
+    window.hasRun = true;
+
     function create_audio_compressor(){
       var video = document.querySelector('video');
         var audioCtx = new AudioContext()
