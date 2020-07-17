@@ -11,6 +11,7 @@
     if (window.hasRun){
       return
     }
+    console.log("%c compressor is active: ", "background-color: hsl(190, 50%, 50%")
 
     window.hasRun = true;
     const default_compressor_settings = {
@@ -32,6 +33,7 @@
     let compressor;
     let source;
     let audioCtx = new AudioContext()
+    let gain = audioCtx.createGain()
 
     // Dictionary for storing the SVG icons
     // that represent the On and Off states.
@@ -91,14 +93,21 @@
     function connect_compressor(){
       source.disconnect(audioCtx.destination)
       source.connect(compressor)
-      compressor.connect(audioCtx.destination)
+      compressor.connect(gain)
+      gain.connect(audioCtx.destination)
     }
     function disconect_compressor(){
       source.disconnect(compressor)
-      compressor.disconnect(audioCtx.destination)
+      gain.disconnect(audioCtx.destination)
       source.connect(audioCtx.destination);
     }
 
+    // a simple function for automatically making 
+    // the gain of the compressor
+    function auto_makeup_gain(){
+      let c_reduction = compressor.reduction
+      gain.gain.value = -(c_reduction / 2.0)
+    }
 
     // Function for instatiating the compressor
     // and then propogating the values with 
@@ -147,5 +156,10 @@
 
     // Attaches a click event to the button
     compression_button.addEventListener('click', connect_objects)
+
+    function update(){
+      let f = requestAnimationFrame(update);
+      auto_makeup_gain()
+    }
     
     })()
