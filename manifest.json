@@ -8,15 +8,13 @@
     },
   
     "description": "Adds a dynamic compressor to YouTube watch pages to to normalize all the audio",
-    "homepage_url" : "https://github.com/TehMerow/youtube_dynamic_compressor",
+    "homepage_url" : "https://github.com/TehMerow/youtube_dynamic_compressor", 
 
-    
-    "browser_action": {
-        "default_icon" : "icons/graphic_eq-24px.svg",
-        "default_title": "yt_dynamic_compressor",
-        "default_popup": "popup/compressor.html"
+    "content_scripts" : [
+      {
+        "matches": ["*://*.youtube.com/watch*"],
+        "js" : ["content_scripts/yt_compressor.js"]
       }
-
-
+    ]
   
   }
