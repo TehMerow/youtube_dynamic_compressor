@@ -1,4 +1,8 @@
-
+// This is avery simple addon for adding a dynamic compressor
+// to the Youtube.com/watch* pages
+// It created a button that is added to the youtube player
+// and has a small settings page to allow the user
+// to set their own compression settings
 
 (function(){
   
