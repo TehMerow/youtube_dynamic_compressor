@@ -3,8 +3,9 @@
     "manifest_version": 2,
     "name": "YouTube Dynamic Compressor",
     "version": "1.0",
+    "author" : "TehMerow",
     "icons" : {
-      "48": "icons/graphic_eq-24px.svg"
+      "48": "icons/icon.png"
     },
   
     "description": "Adds a dynamic compressor to YouTube watch pages to to normalize all the audio",

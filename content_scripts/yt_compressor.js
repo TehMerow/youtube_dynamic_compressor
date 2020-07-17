@@ -20,6 +20,9 @@
   </svg>`
     }
 
+    // creates the audio context
+    // grabs the video player turns it into a media source
+    // create the compressor
     function create_audio_compressor(){
       var video = document.querySelector('video');
       var gainVal = 50
@@ -40,10 +43,14 @@
       btn.id = "yt_compression_button"
       btn.innerHTML = icons.off
       btn.classList.add('ytp-button')
+      btn.style.cssText = `padding: 0.2em`
       youtube_play_bar.appendChild(btn)
       return btn
     }
 
+    // helper function for disconnecting the audio context and
+    // reconnecting it to the compressor
+    // disconnect function does the opposite
     function connect_compressor(){
       source.disconnect(audioCtx.destination)
       source.connect(compressor)
@@ -56,9 +63,10 @@
     }
     create_audio_compressor()
     
-    let compression_button = create_button()
-    console.log(compression_button)
-    compression_button.addEventListener('click', function(e){
+    // quick function to place in the event listener
+    // checks the state of the audio compressor and 
+    // toggle both the button and the compressors
+    function connect_objects(){
       compression_on = !compression_on
       if (compression_on){
         connect_compressor()
@@ -68,7 +76,10 @@
         disconect_compressor()
         compression_button.innerHTML = icons.off
       }
+    }
 
-    })
+    let compression_button = create_button()
+
+    compression_button.addEventListener('click', connect_objects)
     
     })()
